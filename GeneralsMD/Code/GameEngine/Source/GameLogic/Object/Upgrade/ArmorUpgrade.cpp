@@ -58,6 +58,7 @@
 #include "GameLogic/Object.h"
 #include "GameLogic/Module/ArmorUpgrade.h"
 #include "GameLogic/Module/BodyModule.h"
+#include "GameLogic/ArmorSet.h"
 //-----------------------------------------------------------------------------
 // DEFINES ////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------
@@ -95,7 +96,13 @@ void ArmorUpgrade::upgradeImplementation()
 
 	BodyModuleInterface* body = obj->getBodyModule();
 	if ( body )
-		body->setArmorSetFlag( ARMORSET_PLAYER_UPGRADE );
+	{
+		const ArmorUpgradeModuleData* md = getArmorUpgradeModuleData();
+		ArmorSetType flag = ARMORSET_PLAYER_UPGRADE;
+		if (md)
+			flag = (ArmorSetType)md->m_armorSetFlag;
+		body->setArmorSetFlag( flag );
+	}
 
 	// Unique case for AMERICA to test for upgrade to set flag
 	if(isTriggeredBy("Upgrade_AmericaChemicalSuits"))

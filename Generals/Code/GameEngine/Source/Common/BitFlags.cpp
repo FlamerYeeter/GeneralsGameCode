@@ -159,6 +159,8 @@ const char* const ArmorSetFlags::s_bitNameList[] =
 	"ELITE",
 	"HERO",
 	"PLAYER_UPGRADE",
+	"PLAYER_UPGRADE_ONE",
+	"PLAYER_UPGRADE_TWO",
 	"WEAK_VERSUS_BASEDEFENSES",
 
 	nullptr

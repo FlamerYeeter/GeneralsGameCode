@@ -67,7 +67,25 @@ class ArmorUpgrade : public UpgradeModule
 {
 
 	MEMORY_POOL_GLUE_WITH_USERLOOKUP_CREATE( ArmorUpgrade, "ArmorUpgrade" )
-	MAKE_STANDARD_MODULE_MACRO( ArmorUpgrade );
+	struct ArmorUpgradeModuleData : public UpgradeModuleData
+	{
+		Int m_armorSetFlag;
+
+		ArmorUpgradeModuleData() : m_armorSetFlag( ARMORSET_PLAYER_UPGRADE ) {}
+
+		static void buildFieldParse(MultiIniFieldParse& p)
+		{
+			UpgradeModuleData::buildFieldParse(p);
+			static const FieldParse s_fieldParse[] =
+			{
+				{ "ArmorSetFlag", INI::parseInt, nullptr, offsetof( ArmorUpgradeModuleData, m_armorSetFlag ) },
+				{ 0, 0, 0, 0 }
+			};
+			p.add(s_fieldParse, 0);
+		}
+	};
+
+	MAKE_STANDARD_MODULE_MACRO_WITH_MODULE_DATA( ArmorUpgrade, ArmorUpgradeModuleData );
 
 public:
 
