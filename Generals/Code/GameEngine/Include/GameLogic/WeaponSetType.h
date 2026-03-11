@@ -42,7 +42,9 @@ enum WeaponSetType CPP_11(: Int)
 	WEAPONSET_VETERAN		= 0,
 	WEAPONSET_ELITE,
 	WEAPONSET_HERO,
-	WEAPONSET_PLAYER_UPGRADE,			// This weapon set flag comes from a purchased upgrade to the player
+	WEAPONSET_PLAYER_UPGRADE, 			// This weapon set flag comes from a purchased upgrade to the player
+	WEAPONSET_PLAYER_UPGRADE_ONE,      // additional player-upgrade variants
+	WEAPONSET_PLAYER_UPGRADE_TWO,
 	WEAPONSET_CRATEUPGRADE_ONE,
 	WEAPONSET_CRATEUPGRADE_TWO,
 	WEAPONSET_VEHICLE_HIJACK,

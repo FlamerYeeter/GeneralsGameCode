@@ -42,7 +42,26 @@ class WeaponSetUpgrade : public UpgradeModule
 {
 
 	MEMORY_POOL_GLUE_WITH_USERLOOKUP_CREATE( WeaponSetUpgrade, "WeaponSetUpgrade" )
-	MAKE_STANDARD_MODULE_MACRO( WeaponSetUpgrade );
+	// Provide module-specific ModuleData so the chosen weaponset flag can be configured in INI
+	struct WeaponSetUpgradeModuleData : public UpgradeModuleData
+	{
+		Int m_weaponSetFlag;
+
+		WeaponSetUpgradeModuleData() : m_weaponSetFlag( WEAPONSET_PLAYER_UPGRADE ) {}
+
+		static void buildFieldParse(MultiIniFieldParse& p)
+		{
+			UpgradeModuleData::buildFieldParse(p);
+			static const FieldParse s_fieldParse[] =
+			{
+				{ "WeaponSetFlag", INI::parseInt, nullptr, offsetof( WeaponSetUpgradeModuleData, m_weaponSetFlag ) },
+				{ 0, 0, 0, 0 }
+			};
+			p.add(s_fieldParse, 0);
+		}
+	};
+
+	MAKE_STANDARD_MODULE_MACRO_WITH_MODULE_DATA( WeaponSetUpgrade, WeaponSetUpgradeModuleData );
 
 public:
 
